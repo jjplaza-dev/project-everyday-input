@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Menu, Search, ShoppingBag } from "lucide-react";
+import { SearchBox } from "@/components/layout/SearchBox";
 import { getPrimaryNav, getSiteIdentity } from "@/data/selectors/site";
 
 export function Header() {
@@ -9,7 +10,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b bg-white">
       <div className="container-page flex h-16 items-center gap-4">
-        <Link href="/" className="text-display text-xl text-primary">
+        <Link href="/public" className="text-display text-xl text-primary">
           {name}
         </Link>
 
@@ -44,21 +45,9 @@ export function Header() {
           </ul>
         </nav>
 
-        <form role="search" action="/search" method="get" className="ml-auto hidden md:block">
-          <label htmlFor="site-search" className="sr-only">
-            Search products
-          </label>
-          <div className="relative">
-            <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
-            <input
-              id="site-search"
-              name="q"
-              type="search"
-              placeholder="Search keyboards, mice, hubs"
-              className="h-11 w-72 rounded-lg border border-input bg-white pl-9 pr-3 text-sm"
-            />
-          </div>
-        </form>
+        <div className="ml-auto hidden md:block">
+          <SearchBox />
+        </div>
 
         <Link
           href="/search"

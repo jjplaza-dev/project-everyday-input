@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Barlow_Semi_Condensed, DM_Sans } from "next/font/google";
+import { ChatLauncher } from "@/components/chat/ChatLauncher";
 import { AnnouncementBar, Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import "./globals.css";
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main id="main">{children}</main>
         <Footer />
+        <ChatLauncher />
       </body>
     </html>
   );
