@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Barlow_Semi_Condensed, DM_Sans } from "next/font/google";
+import { CartDrawer } from "@/components/cart/CartDrawer";
+import { CartProvider } from "@/components/cart/CartProvider";
 import { ChatLauncher } from "@/components/chat/ChatLauncher";
 import { AnnouncementBar, Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -22,6 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${body.variable} ${display.variable}`}>
       <body>
+        <CartProvider>
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-primary focus:px-4 focus:py-3 focus:text-primary-foreground"
@@ -33,6 +36,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main">{children}</main>
         <Footer />
         <ChatLauncher />
+        <CartDrawer />
+        </CartProvider>
       </body>
     </html>
   );

@@ -17,6 +17,16 @@ export type ShippingMethod = {
 export type CartItem = { variantId: string; productId: string; quantity: number };
 export type Cart = { items: CartItem[]; updatedAt: string; version: 1 };
 
+/** Reducer state: the persisted Cart plus whether it has been read from the browser yet. */
+export type CartState = { cart: Cart; status: "loading" | "ready" };
+
+export type CartAction =
+  | { type: "hydrate"; cart: Cart }
+  | { type: "add"; variantId: string; productId: string }
+  | { type: "setQuantity"; variantId: string; quantity: number }
+  | { type: "remove"; variantId: string }
+  | { type: "clear" };
+
 export type Address = {
   fullName: string;
   line1: string;

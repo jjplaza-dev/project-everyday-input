@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Menu, Search, ShoppingBag } from "lucide-react";
+import { Menu, Search } from "lucide-react";
+import { CartButton } from "@/components/cart/CartButton";
 import { SearchBox } from "@/components/layout/SearchBox";
 import { getPrimaryNav, getSiteIdentity } from "@/data/selectors/site";
 
@@ -10,7 +11,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b bg-white">
       <div className="container-page flex h-16 items-center gap-4">
-        <Link href="/public" className="text-display text-xl text-primary">
+        <Link href="/" className="text-display text-xl text-primary">
           {name}
         </Link>
 
@@ -57,13 +58,7 @@ export function Header() {
           <Search className="size-5" aria-hidden="true" />
         </Link>
 
-        <Link
-          href="/cart"
-          className="inline-flex min-h-11 items-center gap-2 rounded-lg px-3 text-sm font-medium text-primary hover:bg-secondary"
-        >
-          <ShoppingBag className="size-5" strokeWidth={1.5} aria-hidden="true" />
-          <span>Cart</span>
-        </Link>
+        <CartButton />
 
         <details className="relative md:hidden">
           <summary className="inline-flex size-11 cursor-pointer list-none items-center justify-center rounded-lg hover:bg-secondary [&::-webkit-details-marker]:hidden">

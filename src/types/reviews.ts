@@ -10,6 +10,17 @@ export type Review = {
   isSample: boolean;
 };
 
+/** What the write-review form collects before validation. Values are raw strings from the form. */
+export type ReviewDraft = {
+  rating: string;
+  title: string;
+  body: string;
+  displayName: string;
+};
+
+/** A review written in this browser. Never sent anywhere, never moderated. */
+export type StoredReview = Review & { source: "device-local" };
+
 export type ReviewSummary = {
   average: number;
   count: number;

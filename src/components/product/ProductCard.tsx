@@ -5,7 +5,8 @@ import { btnSecondary } from "@/components/shared/button-styles";
 import { RatingStars } from "@/components/shared/RatingStars";
 import { getReviewSummary } from "@/data/selectors/reviews";
 import { getCategories } from "@/data/selectors/categories";
-import { getBrandName, getProductStockStatus } from "@/data/selectors/products";
+import { AddToCartButton } from "@/components/cart/AddToCartButton";
+import { getBrandName, getProductStockStatus, getVariantsForProduct } from "@/data/selectors/products";
 import { formatMoney } from "@/lib/format";
 import type { Product, StockStatus } from "@/types";
 
@@ -43,6 +44,8 @@ export function PriceBlock({ product }: { product: Product }) {
 export function ProductCard({ product }: { product: Product }) {
   const category = getCategories().find((c) => c.id === product.categoryId);
   const status = getProductStockStatus(product.id);
+  const variants = getVariantsForProduct(product.id);
+  const purchasable = variants.length === 1 && variants[0].stockStatus !== "out-of-stock" ? variants[0] : undefined;
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-xl border bg-card shadow-rest transition-shadow duration-150 hover:shadow-float">
       <Link href={`/product/${product.slug}`} className="block bg-secondary p-6" tabIndex={-1} aria-hidden="true">
@@ -59,9 +62,13 @@ export function ProductCard({ product }: { product: Product }) {
           <PriceBlock product={product} />
           <StockIndicator status={status} />
         </div>
-        <Link href={`/product/${product.slug}`} className={`${btnSecondary} mt-2`}>
-          View details
-        </Link>
+        {purchasable ? (
+          <AddToCartButton variantId={purchasable.id} productId={product.id} productName={product.name} className="mt-2 w-full" />
+        ) : (
+          <Link href={`/product/${product.slug}`} className={`${btnSecondary} mt-2`}>
+            {variants.length > 1 ? "Choose options" : "View details"}
+          </Link>
+        )}
       </div>
     </article>
   );

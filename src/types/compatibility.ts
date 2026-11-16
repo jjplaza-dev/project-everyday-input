@@ -1,10 +1,10 @@
 export type Platform =
-  | "windows" | "macos" | "linux" | "chromeos" | "ios" | "android"
-  | "playstation" | "xbox" | "switch";
+    | "windows" | "macos" | "linux" | "chromeos" | "ios" | "android"
+    | "playstation" | "xbox" | "switch";
 
 export type ConnectionType =
-  | "usb-a" | "usb-c" | "bluetooth" | "wireless-dongle"
-  | "aux-3-5mm" | "hdmi" | "ethernet" | "qi-wireless";
+    | "usb-a" | "usb-c" | "bluetooth" | "wireless-dongle"
+    | "aux-3-5mm" | "hdmi" | "ethernet" | "qi-wireless";
 
 export type CompatibilityProfile = {
   platforms: Platform[];
@@ -12,6 +12,8 @@ export type CompatibilityProfile = {
   requirements: string[];
   notes: string[];
 };
+
+export type CompatibilityQuery = { platform?: Platform; connection?: ConnectionType };
 
 export type CompatibilityRow = {
   platform: Platform;

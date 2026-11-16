@@ -25,9 +25,9 @@ export function getFeaturedProducts(limit = 8): Product[] {
 
 export function getBestsellers(limit = 8): Product[] {
   return products
-    .filter((p) => p.bestsellerRank !== undefined)
-    .sort((a, b) => (a.bestsellerRank ?? 0) - (b.bestsellerRank ?? 0))
-    .slice(0, limit);
+      .filter((p) => p.bestsellerRank !== undefined)
+      .sort((a, b) => (a.bestsellerRank ?? 0) - (b.bestsellerRank ?? 0))
+      .slice(0, limit);
 }
 
 export function getBrandName(brandId: string): string {
@@ -36,6 +36,10 @@ export function getBrandName(brandId: string): string {
 
 export function getVariantsForProduct(productId: string): ProductVariant[] {
   return variants.filter((v) => v.productId === productId);
+}
+
+export function getVariantById(variantId: string): ProductVariant | undefined {
+  return variants.find((v) => v.id === variantId);
 }
 
 /** Aggregate status: in stock if any variant is in stock, else low stock if any is low, else out of stock. */

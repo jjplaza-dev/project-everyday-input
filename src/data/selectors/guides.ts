@@ -1,7 +1,7 @@
 import { guides } from "@/data/fixtures/guides";
 import { compatibilityConnections, compatibilitySections } from "@/data/fixtures/compatibility";
 import { getProducts } from "@/data/selectors/products";
-import type { CompatibilityGuideSection, ConnectionType, Guide, Platform, Product } from "@/types";
+import type { CompatibilityGuideSection, CompatibilityQuery, ConnectionType, Guide, Platform, Product } from "@/types";
 
 export function getGuides(): Guide[] {
   return guides;
@@ -30,6 +30,16 @@ export function getCompatibilitySections(): CompatibilityGuideSection[] {
 
 export function getCompatibilityConnections(): ConnectionType[] {
   return compatibilityConnections;
+}
+
+/** Products matching whichever of platform and connection is given. With neither, returns nothing. */
+export function findProductsByCompatibility(q: CompatibilityQuery): Product[] {
+  if (!q.platform && !q.connection) return [];
+  return getProducts().filter(
+    (p) =>
+      (!q.platform || p.compatibility.platforms.includes(q.platform)) &&
+      (!q.connection || p.compatibility.connections.includes(q.connection)),
+  );
 }
 
 /** Products whose profile lists both the platform and the connection. */

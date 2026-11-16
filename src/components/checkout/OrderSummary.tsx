@@ -1,7 +1,9 @@
 import { formatMoney } from "@/lib/format";
 import type { Order } from "@/types";
 
-export function OrderSummary({ order, shippingLabel }: { order: Order; shippingLabel?: string }) {
+type SummaryOrder = Pick<Order, "lines" | "subtotal" | "shipping" | "total">;
+
+export function OrderSummary({ order, shippingLabel }: { order: SummaryOrder; shippingLabel?: string }) {
   return (
     <section aria-labelledby="summary-title" className="rounded-xl border bg-card p-5 shadow-rest">
       <h2 id="summary-title" className="text-display text-2xl text-primary">Order summary</h2>
